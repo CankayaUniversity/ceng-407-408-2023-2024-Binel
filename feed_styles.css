@@ -1,0 +1,134 @@
+/* Genel stiller */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Sol menü */
+.sidenav-1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  z-index: 1;
+  background-color: #333;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidenav-menu {
+  padding: 10px 0;
+}
+
+.nav-link {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.5s;
+}
+
+.nav-link:hover {
+  color: #1e90ff;
+  border-bottom: 2px solid #f1f1f1;
+  transition: border-bottom 0.5s;
+}
+
+.nav-link:first-child {
+  margin-top: 20px;
+}
+
+.navbar-brand {
+  padding: 15px 15px;
+  font-size: 25px;
+  display: block;
+  text-align: center;
+  color: #333;
+}
+
+.navbar-brand img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Arama butonları ve filtre butonları için stiller */
+.search-container input[type="text"] {
+  padding: 10px;
+  margin-right: 10px; /* Boşluk bırakmak için margin-right ekledik */
+  border: none;
+  border-radius: 5px;
+}
+
+.search-container .search-button,
+.search-container .filter-button {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-container .search-button img {
+  width: 38px;
+  height: auto;
+  transition: opacity 0.3s;
+}
+
+.search-container .search-button:hover img {
+  opacity: 0.7;
+}
+
+/* Her bir filtreleme butonuna özel renkler */
+.filter-button_0 { background-color: #ff6347; color: #fff; border: none; margin-left: -69px; width: 40px;height: 30px; /* margin-left butonları sıkıştırarak hepsini searchboxla aynı hizaya getirir.*/} 
+.filter-button_1 { background-color: #ffa500; color: #fff; border: none; width: 40px;height: 30px; }
+.filter-button_2 { background-color: #ffd700; color: #fff; border: none; width: 40px;height: 30px; }
+.filter-button_3 { background-color: #90ee90; color: #fff; border: none; width: 40px;height: 30px; }
+.filter-button_4 { background-color: #87ceeb; color: #fff; border: none; width: 40px;height: 30px; }
+
+
+
+/* Buton hover durumunda çerçevesini kaldırma */
+.filter-button_0:hover,
+.filter-button_1:hover,
+.filter-button_2:hover,
+.filter-button_3:hover,
+.filter-button_4:hover,
+.filter-button_0:focus,
+.filter-button_1:focus,
+.filter-button_2:focus,
+.filter-button_3:focus,
+.filter-button_4:focus {
+  opacity: 0.7;
+  border: 2px solid transparent;
+}
+
+/* Filtreleme butonlarının stilleri */
+.filter-buttons {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 25px; /* Alt kısmında boşluk bırakmak için margin-bottom ekledik */
+  height: 50px; /* Sabit bir yükseklik belirleyerek hover durumunda boyut değişimini engelliyoruz */
+}
+
+
+/* Feed içeriği */
+.container {
+  margin-top: 4rem;
+}
+
+/* Gönderi başlığı çerçevesini ortala */
+.card-title {
+  text-align: center;
+}
+
+

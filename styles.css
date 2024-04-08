@@ -1,0 +1,124 @@
+body {
+    font-family: inherit;
+    background-color: #f4f4f4;
+  }
+  
+  .login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .montserrat-hey {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100; /* font-weight değerini 100 olarak ayarlayın */
+    font-style: normal;
+  }
+  
+
+  h1 {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    font-size: 60px; /* Başlık (h1) için font büyüklüğünü ayarlayın */
+  }
+  
+  h2 {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    font-size: 40px; 
+  }
+
+  h3 {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    font-size: 35px; 
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 150px; /* Giriş yap butonunun maksimum genişliğini ayarlayın */
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .logo {
+    width: 100px; /* Logo genişliğini ayarlayın */
+  }
+  
+ 
+  
+  body {
+    font-family: 'Hellenic Wide', sans-serif;
+    /* Diğer stillendirme kodları */
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .logo {
+    width: 100px; /* Logo genişliğini ayarlayın */
+  }
+  
+  .welcome-text {
+    margin-left: 300px; /* Hoş Geldiniz başlığını logonun hemen sağına kaydır */
+  }
+  
+  #loginButton {
+    margin-top: 20px; /* Giriş yap butonunu başlığın altına kaydır */
+    margin-left: 580px; /* Giriş yap butonunu sağa itin */
+  }
+
+  #registerButton{
+        margin-top: 20px; /* Giriş yap butonunu başlığın altına kaydır */
+        margin-left: 580px; /* Giriş yap butonunu sağa itin */
+  }
+
+  
+  .btn-link:hover {
+    color: red;
+    background-color: transparent; /* Butonun üzerine gelindiğinde arka plan rengini transparent yap */
+  }
+  .modal-header .close {
+    font-size: 2rem; /* Close butonunun boyutunu küçült */
+    width: auto; /* Close butonunun genişliğini ayarla */
+    height: auto; /* Close butonunun yüksekliğini ayarla */
+  }

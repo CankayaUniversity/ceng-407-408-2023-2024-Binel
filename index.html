@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Sayfası</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container d-flex justify-content-between align-items-center min-vh-100">
+  <!-- Logo -->
+  <div class="logo">
+    <img src="Union.png" alt="Your Logo">
+  </div>
+  <div>
+    <!-- Hoş Geldiniz Başlığı -->
+    <div class="welcome-text">
+      <h1>Şu an neler dönüyor?<br></h1> 
+      <h2>Yardımlaşmanın yeri</h2>
+      <h3>Binel'a Hoş Geldiniz</h3>
+    </div>
+
+    <!-- Giriş Yap ve Kayıt Ol Butonları -->
+    <div>
+      <button id="loginButton" class="btn btn-primary mr-3">Giriş Yap</button>
+      <button id="registerButton" class="btn btn-success" data-toggle="modal" data-target="#registerModal">Kayıt Ol</button>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Giriş Yap Pop-up -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Giriş Yap</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Şifre:</label>
+            <div class="input-group">
+              <input type="password" id="password" name="password" class="form-control" required>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="fas fa-eye"></i><span id="passwordToggleText">Şifreyi göster</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block float-left">Giriş Yap</button>
+          <button id="forgotPasswordButton" class="btn btn-link mt-2 float-right">Şifremi Unuttum</button>
+        </form>
+        <p id="error-message1" class="error-message"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Kayıt Ol Pop-up -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Kayıt Ol</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="register-form">
+          <div class="form-group">
+            <label for="firstname">Ad:</label>
+            <input type="text" id="firstname" name="firstname" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Soyad:</label>
+            <input type="text" id="lastname" name="lastname" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="registerUsername" name="username" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-posta:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Şifre:</label>
+            <div class="input-group">
+              <input type="password" id="registerPassword" name="password" class="form-control" required>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="toggleRegisterPassword">
+                  <i class="fas fa-eye"></i><span id="passwordToggleText2">Şifreyi göster</span>
+                </button>
+              
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="passwordConfirm">Şifreyi Onayla:</label>
+        <div class="input-group">
+        <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control" required>
+      </div>
+      <div class="mt-3">
+        <button type="submit" class="btn btn-success btn-block">Kayıt Ol</button>
+      </div>
+    </form>
+    <p id="error-message" class="error-message"></p>
+  </div>
+</div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
