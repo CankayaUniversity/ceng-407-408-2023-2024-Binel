@@ -126,9 +126,96 @@ body {
   margin-top: 4rem;
 }
 
-/* Gönderi başlığı çerçevesini ortala */
-.card-title {
-  text-align: center;
+.card {
+  width: 70%; /* Örnek bir genişlik, istediğiniz değere göre ayarlayabilirsiniz */
+  margin: auto; /* Card'ı sayfanın tam ortasına hizalamak için */
+  min-height: 200px; /* Örnek bir minimum yükseklik, istediğiniz değere göre ayarlayabilirsiniz */
+  background-color: #fff; /* Card'ın arka plan rengi */
+  border-radius: 10px; /* Card'ın kenar yuvarlatma miktarı */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card'ın gölgesi */
+  padding: 20px; /* İçerik ile card kenarı arasındaki boşluk */
+  margin-bottom: 20px; /* Her card arasındaki boşluk */
+ 
+}
+
+.card .btn-primary {
+  float: right;
 }
 
 
+#profilePictureContainer {
+  width: 150px; /* İstediğiniz boyuta göre ayarlayın */
+  height: 150px; /* İstediğiniz boyuta göre ayarlayın */
+  overflow: hidden;
+  border-radius: 50%; /* Yuvarlak çerçeve oluşturur */
+  margin: 0 auto; /* Ortalamak için */
+  border: 3px solid #ccc; /* Çerçeve kenar kalınlığı ve rengi */
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5); /* Hafif bir gölgelendirme ekler */
+}
+
+
+.previous-posts {
+  text-align: center;
+}
+
+.post-frame {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the frame */
+}
+
+/* Add CSS for profile and post images */
+#profilePicture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Resmi çerçevenin tamamını kaplayacak şekilde ayarlar */
+}
+
+#postPicture {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px; /* Adjust the maximum height as needed */
+}
+
+
+
+
+/* Add CSS for the about me section */
+.about-me {
+  margin-top: 30px; /* Adjust spacing as needed */
+}
+
+/* Add border frame to post pictures */
+#postPictureContainer {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px; /* Adjust padding as needed */
+  margin-bottom: 15px;
+  display: inline-block; /* Ensure the container size fits the image */
+}
+
+/* Post çerçeveleri arasında boşluk bırak */
+.post-frame {
+  margin-bottom: 20px; /* Postlar arasındaki boşluğu ayarlayın */
+}
+
+#profilePictureonPostContainer {
+  width: 150px; /* You can adjust this size as needed */
+  height: 150px; /* You can adjust this size as needed */
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0;
+  border: 3px solid #ccc;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  display: flex; /* Use flexbox to center content vertically and horizontally */
+}
+
+#profilePictureonPost {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Resmi çerçevenin tamamını kaplayacak şekilde ayarlar */
+}
