@@ -19,7 +19,7 @@ public partial class User
 
     public DateOnly? Birth { get; set; }
 
-    public string? PasswordHash { get; set; }
+    public string PasswordHash { get; set; }
 
     public virtual Organization? Organization { get; set; }
 

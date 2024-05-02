@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Binel.Models;
+using Binel.ViewModels;
+using System;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Binel.Controllers
@@ -22,17 +26,58 @@ namespace Binel.Controllers
         // POST: /register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Name, Surname, Email, Phone, Birth, PasswordHash")] User user)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // Ekstra doğrulamalar yapabilirsiniz (şifre kontrolü, e-posta doğrulama vb.)
+                // Password ve ConfirmPassword alanlarını kontrol et
+                if (model.Password != model.ConfirmPassword)
+                {
+                    ModelState.AddModelError("ConfirmPassword", "The password and confirmation password do not match.");
+                    return View(model);
+                }
+
+                // Parolayı hashle
+                string hashedPassword = ComputeSHA256Hash(model.Password);
+
+                // Tarih tipini doğrudan DateOnly'e dönüştür
+                DateOnly birthDate = new DateOnly(model.Birth.Year, model.Birth.Month, model.Birth.Day);
+
+                // Yeni kullanıcı oluştur ve kaydet
+                var user = new User
+                {
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    Email = model.Email,
+                    Phone = model.Phone,
+                    Birth = birthDate,
+                    PasswordHash = hashedPassword
+                };
 
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(RegisterConfirmation));
             }
-            return View(user);
+
+            return View(model);
+        }
+
+        // Metod parolayı SHA256 ile hashlemek için
+        private string ComputeSHA256Hash(string input)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(input);
+                byte[] hashBytes = sha256.ComputeHash(bytes);
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    builder.Append(hashBytes[i].ToString("x2")); // Hexadecimal format
+                }
+
+                return builder.ToString();
+            }
         }
 
         // GET: /register/confirmation
