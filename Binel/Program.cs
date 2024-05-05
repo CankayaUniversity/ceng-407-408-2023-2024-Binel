@@ -37,8 +37,21 @@ app.MapControllerRoute(
     pattern: "register",
     defaults: new { controller = "Users", action = "Register" });
 app.MapControllerRoute(
-    name: "feedSearch",
+    name: "default",
     pattern: "feed/search",
     defaults: new { controller = "Feed", action = "Search" });
+
+app.MapControllerRoute(
+    name: "organizationProfile",
+    pattern: "{organizationTitle}",
+    defaults: new { controller = "Organization", action = "Profile" });
+app.MapControllerRoute(
+    name: "donatePost",
+    pattern: "{organizationTitle}/donatepost",
+    defaults: new { controller = "Organization", action = "DonatePost" });
+app.MapControllerRoute(
+    name: "post",
+    pattern: "{organizationTitle}/post",
+    defaults: new { controller = "Organization", action = "Post" });
 
 app.Run();
