@@ -1,0 +1,44 @@
+﻿@model List<Binel.Models.DonatePost>
+
+<h1>Feed</h1>
+
+<form method="get" action="/feed/search">
+    <input type="text" name="keyword" placeholder="Arama yap...">
+    <button type="submit">Ara</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var post in Model)
+        {
+            <li>
+                <h2>@post.Title</h2>
+                <p>@post.DonateText</p>
+                <p>Tarih: @(post.PublishDate.HasValue ? post.PublishDate.Value.ToString("dd/MM/yyyy") : "Tarih bilinmiyor")</p>
+                <p>Organizasyon: @(post.Organization?.OrganizationName ?? "Bilinmiyor")</p>
+                <p>
+                    Kategoriler:
+                    @foreach (var category in post.Categories)
+                    {
+                        <span>@category.CategoryName</span>
+                    }
+                </p>
+            </li>
+        }
+    </ul>
+
+    @if (ViewBag.TotalPages > 1)
+    {
+        <div>
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a href="/feed/search?keyword=@ViewBag.keyword&pageNum=@i">@i</a>
+            }
+        </div>
+    }
+}
+else
+{
+    <p>Sonuç bulunamadı.</p>
+}
