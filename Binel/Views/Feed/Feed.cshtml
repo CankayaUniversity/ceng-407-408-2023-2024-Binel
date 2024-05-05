@@ -13,7 +13,8 @@
         @foreach (var post in Model)
         {
             <li>
-                <h2>@post.Title</h2>
+                <!-- Title'e tıklandığında donate sayfasına gitmek için bağlantı -->
+                <a href="/@post.Organization.OrganizationTitle.ToLower()/donatepost?id=@post.DonateId">@post.Title</a>
                 <p>@post.DonateText</p>
                 <p>Tarih: @(post.PublishDate.HasValue ? post.PublishDate.Value.ToString("dd/MM/yyyy") : "Tarih bilinmiyor")</p>
                 <p>Organizasyon: @(post.Organization?.OrganizationName ?? "Bilinmiyor")</p>
@@ -33,7 +34,7 @@
         <div>
             @for (int i = 1; i <= ViewBag.TotalPages; i++)
             {
-                <a href="/feed/search?keyword=@ViewBag.keyword&pageNum=@i">@i</a>
+                <a href="/feed/search?keyword=@ViewBag.Keyword&pageNum=@i">@i</a>
             }
         </div>
     }

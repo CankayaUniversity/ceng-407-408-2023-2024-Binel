@@ -37,7 +37,7 @@ app.MapControllerRoute(
     pattern: "register",
     defaults: new { controller = "Users", action = "Register" });
 app.MapControllerRoute(
-    name: "default",
+    name: "feedSearch",
     pattern: "feed/search",
     defaults: new { controller = "Feed", action = "Search" });
 
