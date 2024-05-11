@@ -119,7 +119,7 @@ public async Task<IActionResult> Login(LoginViewModel model)
                 return RedirectToAction(nameof(LoginConfirmation));
             }
         }
-        TempData["Message"] = "Login error.:"+hashedPassword1;
+        TempData["Message"] = "Login error.:";
         // Kullanıcı adı veya şifre hatalı
         ModelState.AddModelError(string.Empty, "Invalid username or password.");
     }
