@@ -5,6 +5,8 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Binel.Controllers
 {
@@ -85,5 +87,53 @@ namespace Binel.Controllers
         {
             return View();
         }
+// GET: /login
+public IActionResult Login()
+{
+    return View();
+}
+
+// POST: /login
+[HttpPost]
+//[ValidateAntiForgeryToken]
+public async Task<IActionResult> Login(LoginViewModel model)
+{
+    if (ModelState.IsValid)
+    {
+        // Burada giriş işlemlerini gerçekleştirin, örneğin, kullanıcıyı veritabanında arayın ve kimlik doğrulaması yapın
+
+        // Örnek bir kimlik doğrulama
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+         string hashedPassword1=""; 
+        if (user != null)
+        {
+            // Kullanıcı bulundu, şimdi şifreyi karşılaştırın
+            string hashedPassword = ComputeSHA256Hash(model.Password);
+            hashedPassword1 = hashedPassword;
+            if (user.PasswordHash == hashedPassword)
+            {
+                // Şifre eşleşti, giriş başarılı
+                // Bu aşamada genellikle oturum açma işlemi gerçekleştirilir veya kullanıcı bilgileri saklanır
+                // Örnek olarak TempData kullanarak bir bilgi saklayabilirsiniz
+                TempData["Message"] = "Login successful.";
+                return RedirectToAction(nameof(LoginConfirmation));
+            }
+        }
+        TempData["Message"] = "Login error.:"+hashedPassword1;
+        // Kullanıcı adı veya şifre hatalı
+        ModelState.AddModelError(string.Empty, "Invalid username or password.");
+    }
+
+    // Eğer ModelState.IsValid false ise veya kimlik doğrulama başarısız olduysa, tekrar login sayfasını göster
+    return View(model);
+}
+
+// GET: /login/confirmation
+public IActionResult LoginConfirmation()
+{
+    return View();
+}
+
+
     }
 }
