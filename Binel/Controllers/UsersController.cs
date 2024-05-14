@@ -41,7 +41,7 @@ namespace Binel.Controllers
                 // Parolayı hashle
                 string hashedPassword = ComputeSHA256Hash(model.Password);
 
-                // Tarih tipini doğrudan DateOnly'e dönüştür
+                // Tarih tipini doğrudan DateOnly'e dönüştür..
                 DateOnly birthDate = new DateOnly(model.Birth.Year, model.Birth.Month, model.Birth.Day);
 
                 // Yeni kullanıcı oluştur ve kaydet
