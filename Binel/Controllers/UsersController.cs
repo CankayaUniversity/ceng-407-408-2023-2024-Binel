@@ -62,6 +62,8 @@ namespace Binel.Controllers
 
             return View(model);
         }
+        #region
+        // duygu
         public async Task<IActionResult> Edit()
         {
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -93,6 +95,7 @@ namespace Binel.Controllers
 
             return View(user);
         }
+        #endregion
         // Metod parolayı SHA256 ile hashlemek için
         private string ComputeSHA256Hash(string input)
         {
@@ -136,7 +139,8 @@ public async Task<IActionResult> Login(LoginViewModel model)
          string hashedPassword1=""; 
         if (user != null)
         {
-
+                    #region
+                    //duygu
                     var claims = new List<Claim>
 {
     new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
@@ -150,7 +154,8 @@ public async Task<IActionResult> Login(LoginViewModel model)
                     TempData["Message"] = "Login successful.";
                     return RedirectToAction(nameof(LoginConfirmation));
                 }
-        TempData["Message"] = "Login error.:";
+                #endregion
+                TempData["Message"] = "Login error.:";
         // Kullanıcı adı veya şifre hatalı
         ModelState.AddModelError(string.Empty, "Invalid username or password.");
     }
