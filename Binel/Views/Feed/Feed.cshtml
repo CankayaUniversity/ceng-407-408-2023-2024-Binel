@@ -17,7 +17,13 @@
                 <a href="/@post.Organization.OrganizationTitle.ToLower()/donatepost?id=@post.DonateId">@post.Title</a>
                 <p>@post.DonateText</p>
                 <p>Tarih: @(post.PublishDate.HasValue ? post.PublishDate.Value.ToString("dd/MM/yyyy") : "Tarih bilinmiyor")</p>
-                <p>Organizasyon: @(post.Organization?.OrganizationName ?? "Bilinmiyor")</p>
+
+                <!-- Organizasyon adına tıklandığında organizasyon sayfasına gitmek için bağlantı -->
+                @if (post.Organization != null)
+                {
+                    <p>Organizasyon: <a href="/@post.Organization.OrganizationTitle.ToLower()">@post.Organization.OrganizationName</a></p>
+                }
+
                 <p>
                     Kategoriler:
                     @foreach (var category in post.Categories)
