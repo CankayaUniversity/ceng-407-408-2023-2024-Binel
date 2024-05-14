@@ -1,0 +1,11 @@
+﻿@model Binel.Models.Post
+
+<h1>@Model.Title</h1>
+
+<p>@Model.PostText</p>
+
+<!-- Medya dosyalarını göster -->
+@foreach (var file in Model.Files)
+{
+    <img src="@file.FileUrl1" alt="Media" />
+}
