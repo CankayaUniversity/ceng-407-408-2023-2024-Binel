@@ -10,3 +10,36 @@
 {
     <img src="@file.FileUrl1" alt="Media" />
 }
+
+<!-- Bağış formu -->
+<form method="post" action="/Organization/Donate">
+    <input type="hidden" name="id" value="@Model.DonateId" />
+
+    <!-- Bağış miktarı giriş alanı -->
+    <label for="donateAmount">Bağış Miktarı: </label>
+    <input type="number" id="donateAmount" name="donateAmount" />
+
+    <!-- Bağış barı -->
+    <input type="range" id="donateSlider" name="donateSlider" min="@Model.MinLimit" max="@Model.MaxLimit" value="@Model.MinLimit" oninput="updateDonateInput(this.value)">
+
+    <!-- Doğrulama sonucuna göre mesajları görüntüle -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div style="color: red;">@TempData["ErrorMessage"]</div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div style="color: green;">@TempData["SuccessMessage"]</div>
+    }
+
+
+    <!-- Bağış butonu -->
+    <button type="submit">Donate</button>
+</form>
+
+<script>
+    // Bağış miktarı input alanını güncelle
+    function updateDonateInput(value) {
+        document.getElementById('donateAmount').value = value;
+    }
+</script>

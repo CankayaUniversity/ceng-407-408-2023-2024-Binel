@@ -48,7 +48,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "organizationProfile",
     pattern: "{organizationTitle}",
-    defaults: new { controller = "Organization", action = "Profile" });
+    defaults: new { controller = "Organization", action = "Profile"});
 app.MapControllerRoute(
     name: "donatePost",
     pattern: "{organizationTitle}/donatepost",

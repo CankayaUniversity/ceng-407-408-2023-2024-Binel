@@ -53,6 +53,39 @@ namespace Binel.Controllers
             return View(donatePost);
         }
 
+        // Bağış yapma işlemi
+        [HttpPost]
+        public async Task<IActionResult> Donate(int id, int donateAmount)
+        {
+            var donatePost = await _context.DonatePosts
+                .Include(dp => dp.Organization) // Organization navigasyon özelliğini dahil et
+                .FirstOrDefaultAsync(dp => dp.DonateId == id);
+
+            if (donatePost == null)
+            {
+                return NotFound();
+            }
+
+            // Bağış miktarını kontrol et
+            if (donateAmount < donatePost.MinLimit || donateAmount > donatePost.MaxLimit)
+            {
+                // Hata durumunda donatePost'u tekrar gönder ve hata mesajını TempData'ye ekle
+                TempData["ErrorMessage"] = "Invalid donate amount";
+                return RedirectToAction("DonatePost", new { id = id, organizationTitle = donatePost.Organization.OrganizationTitle });
+            }
+
+            // Toplam bağış miktarını güncelle
+            donatePost.TotalDonate = (donatePost.TotalDonate ?? 0) + donateAmount;
+
+            // Veritabanında değişiklikleri kaydet
+            await _context.SaveChangesAsync();
+
+            // Başarılı bağış durumunda başarı sayfasına yönlendirme yap
+            ViewBag.DonateTitle = donatePost.Title;
+            return View("DonateSuccess");
+        }
+
+
         // Normal gönderi detay sayfası
         [Route("{organizationTitle}/post")]
         public async Task<IActionResult> Post(int? id, string organizationTitle)
