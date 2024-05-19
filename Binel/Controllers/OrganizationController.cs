@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 using Binel.Models;
 
@@ -77,6 +78,17 @@ namespace Binel.Controllers
             // Toplam bağış miktarını güncelle
             donatePost.TotalDonate = (donatePost.TotalDonate ?? 0) + donateAmount;
 
+            // Bağış logunu oluştur
+            var donateLog = new DonateLog
+            {
+                DonateId = donatePost.DonateId,
+                DonateDate = DateTime.Now,
+                Amount = donateAmount
+            };
+
+            // Logu veritabanına ekle
+            _context.DonateLogs.Add(donateLog);
+
             // Veritabanında değişiklikleri kaydet
             await _context.SaveChangesAsync();
 
@@ -84,7 +96,6 @@ namespace Binel.Controllers
             ViewBag.DonateTitle = donatePost.Title;
             return View("DonateSuccess");
         }
-
 
         // Normal gönderi detay sayfası
         [Route("{organizationTitle}/post")]
