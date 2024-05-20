@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Binel.Controllers
 {
@@ -63,7 +65,56 @@ namespace Binel.Controllers
 
             return View(model);
         }
+        #region
+        // Duygu start
+        public async Task<IActionResult> Edit()
+        {
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+            if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out var userId))
+            {
+
+                return RedirectToAction("Login");
+            }
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int userId, User user)
+        {
+            ViewBag.OrganizationId = user.OrganizationId;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Users.Update(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Login");
+
+                }
+                catch (Exception ex)
+                {
+
+                    ModelState.AddModelError(string.Empty, "Bir hata oluştu, lütfen daha sonra tekrar deneyin.");
+                }
+
+            }
+
+            return View(user);
+        }
+        // Duygu finish
         // Metod parolayı SHA256 ile hashlemek için
         private string ComputeSHA256Hash(string input)
         {
@@ -112,10 +163,17 @@ public async Task<IActionResult> Login(LoginViewModel model)
             hashedPassword1 = hashedPassword;
             if (user.PasswordHash == hashedPassword)
             {
-                // Şifre eşleşti, giriş başarılı
-                // Bu aşamada genellikle oturum açma işlemi gerçekleştirilir veya kullanıcı bilgileri saklanır
-                // Örnek olarak TempData kullanarak bir bilgi saklayabilirsiniz
-                TempData["Message"] = "Login successful.";
+                        var claims = new List<Claim>
+{
+    new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
+};
+                        var identity = new ClaimsIdentity(claims, "login");
+                        var principal = new ClaimsPrincipal(identity);
+                        await HttpContext.SignInAsync(principal);
+                        // Şifre eşleşti, giriş başarılı
+                        // Bu aşamada genellikle oturum açma işlemi gerçekleştirilir veya kullanıcı bilgileri saklanır
+                        // Örnek olarak TempData kullanarak bir bilgi saklayabilirsiniz
+                        TempData["Message"] = "Login successful.";
                 return RedirectToAction(nameof(LoginConfirmation));
             }
         }
@@ -127,9 +185,10 @@ public async Task<IActionResult> Login(LoginViewModel model)
     // Eğer ModelState.IsValid false ise veya kimlik doğrulama başarısız olduysa, tekrar login sayfasını göster
     return View(model);
 }
-
-// GET: /login/confirmation
-public IActionResult LoginConfirmation()
+        
+        #endregion
+        // GET: /login/confirmation
+        public IActionResult LoginConfirmation()
 {
     return View();
 }

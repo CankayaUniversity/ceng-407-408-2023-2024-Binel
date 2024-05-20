@@ -1,8 +1,18 @@
 using Binel.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+#region
+// Duygu Start
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/login";
+    });
+// Duygu finish
+#endregion
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -28,6 +38,17 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+#region 
+//Duygu Start
+app.UseAuthentication();
+
+app.MapControllerRoute(
+    name: "Edit",
+    pattern: "Users/Edit/{userId}",
+    defaults: new { controller = "Users", action = "Edit" });
+//Duygu Finish
+#endregion
 
 app.MapControllerRoute(
     name: "default",
