@@ -1,0 +1,53 @@
+﻿@model Binel.Models.Organization
+
+<div style="text-align: center;">
+    <h1>@Model.OrganizationName</h1>
+    <p>@Model.Biography</p>
+    <!-- Diğer organizasyon bilgileri -->
+
+    <h2>Donate Posts</h2>
+    @foreach (var donatePost in Model.DonatePosts)
+    {
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <!-- Medya öğesi (resim) solda -->
+            <div style="flex: 1; text-align: center;">
+                @foreach (var file in donatePost.Files)
+                {
+                    <img src="@file.FileUrl1" alt="Media" style="max-width: 200px; max-height: 150px; margin-right: 10px;" />
+                }
+            </div>
+            <!-- Metin sağda -->
+            <div style="flex: 2;">
+                <h3>
+                    <a asp-action="DonatePost" asp-controller="Organization" asp-route-id="@donatePost.DonateId" asp-route-organizationTitle="@Model.OrganizationTitle">
+                        @donatePost.Title
+                    </a>
+                </h3>
+                <p>@donatePost.DonateText</p>
+            </div>
+        </div>
+    }
+
+    <h2>Posts</h2>
+    @foreach (var post in Model.Posts)
+    {
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <!-- Medya öğesi (resim) solda -->
+            <div style="flex: 1; text-align: center;">
+                @foreach (var file in post.Files)
+                {
+                    <img src="@file.FileUrl1" alt="Media" style="max-width: 200px; max-height: 150px; margin-right: 10px;" />
+                }
+            </div>
+            <!-- Metin sağda -->
+            <div style="flex: 2;">
+                <h3>
+                    <a asp-action="Post" asp-controller="Organization" asp-route-id="@post.PostId" asp-route-organizationTitle="@Model.OrganizationTitle">
+                        @post.Title
+                    </a>
+                </h3>
+                <p>@post.PostText</p>
+            </div>
+        </div>
+    }
+</div>
