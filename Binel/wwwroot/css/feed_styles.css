@@ -1,0 +1,221 @@
+/* Genel stiller */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Sol menü */
+.sidenav-1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  z-index: 1;
+  background-color: #333;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidenav-menu {
+  padding: 10px 0;
+}
+
+.nav-link {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.5s;
+}
+
+.nav-link:hover {
+  color: #1e90ff;
+  border-bottom: 2px solid #f1f1f1;
+  transition: border-bottom 0.5s;
+}
+
+.nav-link:first-child {
+  margin-top: 20px;
+}
+
+.navbar-brand {
+  padding: 15px 15px;
+  font-size: 25px;
+  display: block;
+  text-align: center;
+  color: #333;
+}
+
+.navbar-brand img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Arama butonları ve filtre butonları için stiller */
+.search-container input[type="text"] {
+  padding: 10px;
+  margin-right: 10px; /* Boşluk bırakmak için margin-right ekledik */
+  border: none;
+  border-radius: 5px;
+}
+
+.search-container .search-button,
+.search-container .filter-button {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-container .search-button img {
+  width: 38px;
+  height: auto;
+  transition: opacity 0.3s;
+}
+
+.search-container .search-button:hover img {
+  opacity: 0.7;
+}
+
+/* Her bir filtreleme butonuna özel renkler */
+.filter-button_0 { background-color: #ff6347; color: #fff; border: none; margin-left: -69px; width: 40px;height: 30px; /* margin-left butonları sıkıştırarak hepsini searchboxla aynı hizaya getirir.*/} 
+.filter-button_1 { background-color: #ffa500; color: #fff; border: none; width: 40px;height: 30px; }
+.filter-button_2 { background-color: #ffd700; color: #fff; border: none; width: 40px;height: 30px; }
+.filter-button_3 { background-color: #90ee90; color: #fff; border: none; width: 40px;height: 30px; }
+.filter-button_4 { background-color: #87ceeb; color: #fff; border: none; width: 40px;height: 30px; }
+
+
+
+/* Buton hover durumunda çerçevesini kaldırma */
+.filter-button_0:hover,
+.filter-button_1:hover,
+.filter-button_2:hover,
+.filter-button_3:hover,
+.filter-button_4:hover,
+.filter-button_0:focus,
+.filter-button_1:focus,
+.filter-button_2:focus,
+.filter-button_3:focus,
+.filter-button_4:focus {
+  opacity: 0.7;
+  border: 2px solid transparent;
+}
+
+/* Filtreleme butonlarının stilleri */
+.filter-buttons {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 25px; /* Alt kısmında boşluk bırakmak için margin-bottom ekledik */
+  height: 50px; /* Sabit bir yükseklik belirleyerek hover durumunda boyut değişimini engelliyoruz */
+}
+
+
+/* Feed içeriği */
+.container {
+  margin-top: 4rem;
+}
+
+.card {
+  width: 70%; /* Örnek bir genişlik, istediğiniz değere göre ayarlayabilirsiniz */
+  margin: auto; /* Card'ı sayfanın tam ortasına hizalamak için */
+  min-height: 200px; /* Örnek bir minimum yükseklik, istediğiniz değere göre ayarlayabilirsiniz */
+  background-color: #fff; /* Card'ın arka plan rengi */
+  border-radius: 10px; /* Card'ın kenar yuvarlatma miktarı */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card'ın gölgesi */
+  padding: 20px; /* İçerik ile card kenarı arasındaki boşluk */
+  margin-bottom: 20px; /* Her card arasındaki boşluk */
+ 
+}
+
+.card .btn-primary {
+  float: right;
+}
+
+
+#profilePictureContainer {
+  width: 150px; /* İstediğiniz boyuta göre ayarlayın */
+  height: 150px; /* İstediğiniz boyuta göre ayarlayın */
+  overflow: hidden;
+  border-radius: 50%; /* Yuvarlak çerçeve oluşturur */
+  margin: 0 auto; /* Ortalamak için */
+  border: 3px solid #ccc; /* Çerçeve kenar kalınlığı ve rengi */
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5); /* Hafif bir gölgelendirme ekler */
+}
+
+
+.previous-posts {
+  text-align: center;
+}
+
+.post-frame {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the frame */
+}
+
+/* Add CSS for profile and post images */
+#profilePicture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Resmi çerçevenin tamamını kaplayacak şekilde ayarlar */
+}
+
+#postPicture {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px; /* Adjust the maximum height as needed */
+}
+
+
+
+
+/* Add CSS for the about me section */
+.about-me {
+  margin-top: 30px; /* Adjust spacing as needed */
+}
+
+/* Add border frame to post pictures */
+#postPictureContainer {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px; /* Adjust padding as needed */
+  margin-bottom: 15px;
+  display: inline-block; /* Ensure the container size fits the image */
+}
+
+/* Post çerçeveleri arasında boşluk bırak */
+.post-frame {
+  margin-bottom: 20px; /* Postlar arasındaki boşluğu ayarlayın */
+}
+
+#profilePictureonPostContainer {
+  width: 150px; /* You can adjust this size as needed */
+  height: 150px; /* You can adjust this size as needed */
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0;
+  border: 3px solid #ccc;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  display: flex; /* Use flexbox to center content vertically and horizontally */
+}
+
+#profilePictureonPost {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Resmi çerçevenin tamamını kaplayacak şekilde ayarlar */
+}
