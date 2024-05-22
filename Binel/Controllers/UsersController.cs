@@ -159,13 +159,21 @@ namespace Binel.Controllers
                         var identity = new ClaimsIdentity(claims, "login");
                         var principal = new ClaimsPrincipal(identity);
                         await HttpContext.SignInAsync(principal);
-
+                        // Kullanıcı türünü belirle ve Session'a kaydet
+                        if (user.OrganizationId == null)
+                        {
+                            // Bireysel kullanıcı olarak işaretle
+                            HttpContext.Session.SetString("UserType", "Individual");
+                        }
+                        else
+                        {
+                            // Kurumsal kullanıcı olarak işaretle
+                            HttpContext.Session.SetString("UserType", "Corporate");
+                        }
                         // Session'a kullanıcı ID'sini kaydet
-                        bool isCorporate = user.OrganizationId != null;
 
                 // Session'a kullanıcı ID'sini ve kurumsal mı bireysel mi olduğunu kaydet
                 HttpContext.Session.SetInt32("UserID", user.UserId);
-                HttpContext.Session.SetBool("IsCorporate", isCorporate);
                         TempData["Message"] = "Login successful.";
                         return RedirectToAction(nameof(LoginConfirmation));
                     }
