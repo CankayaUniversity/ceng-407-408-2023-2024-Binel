@@ -91,7 +91,7 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="~/js/site.js"></script>
 
-<script>
+@* <script>
   $(document).ready(function() {
     $('#register-form').submit(function(event) {
       event.preventDefault();
@@ -159,7 +159,13 @@
     return emailRegex.test(email);
   }
 </script>
-
+ *@
 
 </body>
 </html>
+
+
+
+               @section Scripts {
+                   <partial name = "_ValidationScriptsPartial"/>
+               }

@@ -65,7 +65,7 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="~/js/site.js"></script>
 
-<script>
+@* <script>
   // Form kontrolü
   $(document).ready(function() {
     $('#login-form').submit(function(event) {
@@ -119,6 +119,13 @@
   }
 </script>
 
-
+ *@
 </body>
 </html>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
