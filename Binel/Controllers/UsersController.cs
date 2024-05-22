@@ -9,6 +9,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http; // Session için gerekli
 
 namespace Binel.Controllers
 {
@@ -65,15 +66,14 @@ namespace Binel.Controllers
 
             return View(model);
         }
-        #region
-        // Duygu start
+
+        #region Duygu start
         public async Task<IActionResult> Edit()
         {
             var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out var userId))
             {
-
                 return RedirectToAction("Login");
             }
 
@@ -86,9 +86,7 @@ namespace Binel.Controllers
             {
                 return RedirectToAction("Login");
             }
-
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,20 +100,16 @@ namespace Binel.Controllers
                     _context.Users.Update(user);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Login");
-
                 }
                 catch (Exception ex)
                 {
-
                     ModelState.AddModelError(string.Empty, "Bir hata oluştu, lütfen daha sonra tekrar deneyin.");
                 }
-
             }
-
             return View(user);
         }
-        // Duygu finish
-        // Metod parolayı SHA256 ile hashlemek için
+        #endregion
+
         private string ComputeSHA256Hash(string input)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -138,61 +132,55 @@ namespace Binel.Controllers
         {
             return View();
         }
-// GET: /login
-public IActionResult Login()
-{
-    return View();
-}
 
-// POST: /login
-[HttpPost]
-//[ValidateAntiForgeryToken]
-public async Task<IActionResult> Login(LoginViewModel model)
-{
-    if (ModelState.IsValid)
-    {
-        // Burada giriş işlemlerini gerçekleştirin, örneğin, kullanıcıyı veritabanında arayın ve kimlik doğrulaması yapın
-
-        // Örnek bir kimlik doğrulama
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-         string hashedPassword1=""; 
-        if (user != null)
+        // GET: /login
+        public IActionResult Login()
         {
-            // Kullanıcı bulundu, şimdi şifreyi karşılaştırın
-            string hashedPassword = ComputeSHA256Hash(model.Password);
-            hashedPassword1 = hashedPassword;
-            if (user.PasswordHash == hashedPassword)
+            return View();
+        }
+
+        // POST: /login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
             {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+                if (user != null)
+                {
+                    string hashedPassword = ComputeSHA256Hash(model.Password);
+                    if (user.PasswordHash == hashedPassword)
+                    {
                         var claims = new List<Claim>
-{
-    new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
-};
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
+                        };
                         var identity = new ClaimsIdentity(claims, "login");
                         var principal = new ClaimsPrincipal(identity);
                         await HttpContext.SignInAsync(principal);
-                        // Şifre eşleşti, giriş başarılı
-                        // Bu aşamada genellikle oturum açma işlemi gerçekleştirilir veya kullanıcı bilgileri saklanır
-                        // Örnek olarak TempData kullanarak bir bilgi saklayabilirsiniz
-                        TempData["Message"] = "Login successful.";
-                return RedirectToAction(nameof(LoginConfirmation));
-            }
-        }
-        TempData["Message"] = "Login error.:";
-        // Kullanıcı adı veya şifre hatalı
-        ModelState.AddModelError(string.Empty, "Invalid username or password.");
-    }
 
-    // Eğer ModelState.IsValid false ise veya kimlik doğrulama başarısız olduysa, tekrar login sayfasını göster
-    return View(model);
-}
-        
-        #endregion
+                        // Session'a kullanıcı ID'sini kaydet
+                        bool isCorporate = user.OrganizationId != null;
+
+                // Session'a kullanıcı ID'sini ve kurumsal mı bireysel mi olduğunu kaydet
+                HttpContext.Session.SetInt32("UserID", user.UserId);
+                HttpContext.Session.SetBool("IsCorporate", isCorporate);
+                        TempData["Message"] = "Login successful.";
+                        return RedirectToAction(nameof(LoginConfirmation));
+                    }
+                }
+                TempData["Message"] = "Login error.:";
+                ModelState.AddModelError(string.Empty, "Invalid username or password.");
+            }
+
+            return View(model);
+        }
+
         // GET: /login/confirmation
         public IActionResult LoginConfirmation()
-{
-    return View();
-}
-
-
+        {
+            return View();
+        }
     }
 }
