@@ -70,6 +70,10 @@ app.MapControllerRoute(
     name: "login",
     pattern: "login",
     defaults: new { controller = "Users", action = "Login" });
+app.MapControllerRoute(
+    name: "logout",
+    pattern: "logout",
+    defaults: new { controller = "Users", action = "Logout" });
 
 app.MapControllerRoute(
     name: "feedSearch",

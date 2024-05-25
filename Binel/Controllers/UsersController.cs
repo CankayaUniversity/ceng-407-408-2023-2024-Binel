@@ -190,5 +190,19 @@ namespace Binel.Controllers
         {
             return View();
         }
+        // POST: /logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+
+            HttpContext.Session.Clear();
+
+            TempData["Message"] = "Logout successful.";
+
+            return RedirectToAction("Login", "Users");
+        }
+
     }
 }
