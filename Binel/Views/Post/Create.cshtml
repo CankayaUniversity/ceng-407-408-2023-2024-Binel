@@ -1,0 +1,55 @@
+﻿@model Binel.Models.PostCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Post</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @{
+                if (ViewBag.OrganizationName != null)
+                {
+                    <div class="form-group">
+                        <label asp-for="OrganizationId" class="control-label"></label>
+                        <input type="text" value="@ViewBag.OrganizationName" class="form-control" readonly />
+                        <input type="hidden" asp-for="OrganizationId" value="@ViewBag.OrganizationId" />
+                    </div>
+                }
+            }
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostText" class="control-label"></label>
+                <input asp-for="PostText" class="form-control" />
+                <span asp-validation-for="PostText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExternalPlatform" class="control-label"></label>
+                <input asp-for="ExternalPlatform" class="form-control" />
+                <span asp-validation-for="ExternalPlatform" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadedFiles" class="form-control"></label>
+                <input asp-for="UploadedFiles" type="file" multiple class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
