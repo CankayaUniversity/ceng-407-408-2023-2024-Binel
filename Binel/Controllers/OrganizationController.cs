@@ -58,6 +58,16 @@ namespace Binel.Controllers
         [HttpPost]
         public async Task<IActionResult> Donate(int id, int donateAmount)
         {
+            // Kullanıcının ID'sini al
+            var userId = HttpContext.Session.GetInt32("UserID");
+
+            // Kullanıcı oturumu kontrolü
+            if (userId == null)
+            {
+                // Kullanıcı oturumu yoksa, giriş yapmaları için yönlendir
+                return RedirectToAction("Login", "Users");
+            }
+
             var donatePost = await _context.DonatePosts
                 .Include(dp => dp.Organization) // Organization navigasyon özelliğini dahil et
                 .FirstOrDefaultAsync(dp => dp.DonateId == id);
@@ -83,7 +93,8 @@ namespace Binel.Controllers
             {
                 DonateId = donatePost.DonateId,
                 DonateDate = DateTime.Now,
-                Amount = donateAmount
+                Amount = donateAmount,
+                Users = new List<User> { await _context.Users.FindAsync(userId) } // Kullanıcıyı bağış loguna ekle
             };
 
             // Logu veritabanına ekle
@@ -96,6 +107,7 @@ namespace Binel.Controllers
             ViewBag.DonateTitle = donatePost.Title;
             return View("DonateSuccess");
         }
+
 
         // Normal gönderi detay sayfası
         [Route("{organizationTitle}/post")]
