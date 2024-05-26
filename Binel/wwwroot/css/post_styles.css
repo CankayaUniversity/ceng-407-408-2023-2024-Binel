@@ -1,0 +1,16 @@
+﻿/* post_styles.css */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}

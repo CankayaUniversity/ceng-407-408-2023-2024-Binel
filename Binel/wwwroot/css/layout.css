@@ -1,0 +1,79 @@
+﻿/* styles.css */
+
+/* Genel stil ayarları */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #343a40;
+    padding: 10px 0;
+}
+
+    header .navbar-brand {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    header .navbar-nav .nav-link {
+        color: #ffffff;
+    }
+
+        header .navbar-nav .nav-link:hover {
+            color: #cccccc;
+        }
+
+/* Ana içerik alanı */
+.container {
+    margin-top: 20px;
+}
+
+main {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer stili */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+
+    footer a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Mobil uyumlu stil */
+@media (max-width: 576px) {
+    header .navbar-brand {
+        font-size: 20px;
+    }
+
+    header .navbar-nav .nav-link {
+        font-size: 14px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    footer {
+        font-size: 14px;
+    }
+}

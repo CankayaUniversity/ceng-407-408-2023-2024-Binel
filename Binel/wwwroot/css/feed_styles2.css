@@ -1,25 +1,43 @@
-/* feed_styles.css */
-
-/* Genel stiller */
-body {
+﻿body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #f4f4f4;
-}
-.montserrat-hey {
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 100;
-    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
 }
 
-h1, h2, h3, h4 {
-    font-family: "Montserrat", sans-serif;
-    text-align: center;
+
+/* Navbar Stilleri */
+.navbar {
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif; /* Navbar yazı tipi */
 }
 
-h4 {
-    font-size: 1rem; /* İstenilen boyutu px, em veya rem olarak ayarlayabilirsiniz */
+.navbar-brand {
+    color: #333;
+    font-size: 25px;
+    margin-right: 20px;
+    font-family: 'Montserrat', sans-serif; /* Navbar brand yazı tipi */
 }
+
+.navbar-nav {
+    margin-left: auto;
+    font-family: 'Montserrat', sans-serif; /* Navbar öğelerinin yazı tipi */
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+
+.nav-link {
+    color: #333;
+    font-family: 'Montserrat', sans-serif; /* Navbar linklerinin yazı tipi */
+}
+
+    .nav-link:hover {
+        color: #1e90ff;
+    }
+
 
 
 .search-container {
@@ -94,6 +112,8 @@ h4 {
     width: 40px;
     height: 30px;
 }
+
+
 
     /* Buton hover durumunda çerçevesini kaldırma */
     .filter-button_0:hover,
@@ -216,5 +236,3 @@ h4 {
     height: 100%;
     object-fit: cover; /* Resmi çerçevenin tamamını kaplayacak şekilde ayarlar */
 }
-
-

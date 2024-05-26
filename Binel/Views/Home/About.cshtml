@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Binel Ekibi";
+    Layout = "_Layout";
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -8,16 +9,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakkımızda</title>
+    <title>Binel Ekibi</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="feed_styles.css">
+    <link rel="stylesheet" href="~/css/styles.css">
 </head>
 <body>
-
-
     <!-- About Us Content -->
     <div class="container mt-5">
         <div class="row">
@@ -33,9 +32,27 @@
                     <li>Duygu DORAN</li>
                     <li>Serkan ŞAHİNOĞLU</li>
                 </ul>
+                <h3>Advisor:</h3>
+                <ul>
+                    <li>Murat SARAN</li>
+                </ul>
             </div>
             <div class="col-md-6">
-                <img src="about_us_image.jpg" alt="About Us Image" class="img-fluid">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <img src="~/images/1716721013116.jpg" alt="About Us Image 1" class="img-fluid mb-3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <img src="~/images/favicon256.png" alt="About Us Image 2" class="img-fluid" style="width: 111px; height : 111px;">
+                    </div>
+                    <div class="col-6">
+                        <img src="~/images/logo.png" alt="About Us Image 3" class="img-fluid" style="width: 111px; height: 111px;">
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

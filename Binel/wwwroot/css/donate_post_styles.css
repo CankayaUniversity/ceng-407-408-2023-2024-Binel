@@ -1,0 +1,40 @@
+﻿/* donate_post_styles.css */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
