@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Binel.Models;
 using Binel.ViewModels;
-using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http; // Session için gerekli
 
 namespace Binel.Controllers
 {

@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/feed_styles2.css">
+    <link rel="stylesheet" href="~/css/styles.css">
 </head>
 <body>
 
@@ -54,7 +55,7 @@
                                 <h5 class="card-title">
                                     <a href="/@post.Organization.OrganizationTitle.ToLower()/donatepost?id=@post.DonateId">@post.Title</a>
                                 </h5>
-                                <button class="btn btn-primary">Donate</button>
+                                <a href="/@post.Organization.OrganizationTitle.ToLower()/donatepost?id=@post.DonateId" class="btn btn-primary">Donate</a>
                                 <p class="card-text">@post.DonateText</p>
                                 <!-- Tarih bilgisini sağ alt köşede göster -->
                                 <div class="publish-date text-right">

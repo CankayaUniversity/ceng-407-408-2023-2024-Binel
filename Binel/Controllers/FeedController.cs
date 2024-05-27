@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Binel.Models;
 
@@ -14,12 +15,14 @@ namespace Binel.Controllers
         }
 
         // GET: /feed
+        [Authorize] // Sadece yetkilendirilmiş kullanıcılar erişebilir
         public IActionResult Index(string keyword, int pageNum = 1)
         {
             return RedirectToAction("Search", new { keyword = keyword, pageNum = pageNum });
         }
 
         // GET: /feed/search?keyword=[Arama Kelimesi]&pageNum=[Sayfa Numarası]
+        [Authorize] // Sadece yetkilendirilmiş kullanıcılar erişebilir
         public IActionResult Search(string keyword, int pageNum = 1)
         {
             IQueryable<DonatePost> query = _context.DonatePosts
