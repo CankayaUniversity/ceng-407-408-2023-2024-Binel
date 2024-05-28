@@ -135,52 +135,59 @@ namespace Binel.Controllers
             return View();
         }
 
-        // POST: /login
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+       // POST: /login
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Login(LoginViewModel model)
+{
+    if (ModelState.IsValid)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+        if (user != null)
         {
-            if (ModelState.IsValid)
+            string hashedPassword = ComputeSHA256Hash(model.Password);
+            if (user.PasswordHash == hashedPassword)
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-                if (user != null)
+                var claims = new List<Claim>
                 {
-                    string hashedPassword = ComputeSHA256Hash(model.Password);
-                    if (user.PasswordHash == hashedPassword)
-                    {
-                        var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
-                        };
-                        var identity = new ClaimsIdentity(claims, "login");
-                        var principal = new ClaimsPrincipal(identity);
-                        await HttpContext.SignInAsync(principal);
-                        // Kullanıcı türünü belirle ve Session'a kaydet
-                        if (user.OrganizationId == null)
-                        {
-                            // Bireysel kullanıcı olarak işaretle
-                            HttpContext.Session.SetString("UserType", "Individual");
-                        }
-                        else
-                        {
-                            // Kurumsal kullanıcı olarak işaretle
-                            HttpContext.Session.SetString("UserType", "Corporate");
-                        }
-                        // Session'a kullanıcı ID'sini kaydet
-
-                // Session'a kullanıcı ID'sini ve kurumsal mı bireysel mi olduğunu kaydet
-                HttpContext.Session.SetInt32("UserID", user.UserId);
-                        TempData["Message"] = "Login successful.";
-                        return RedirectToAction(nameof(LoginConfirmation));
-                    }
+                    new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
+                };
+                var identity = new ClaimsIdentity(claims, "login");
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(principal);
+                
+                // Kullanıcı türünü belirle ve Session'a kaydet
+                if (user.OrganizationId == null)
+                {
+                    // Bireysel kullanıcı olarak işaretle
+                    HttpContext.Session.SetString("UserType", "Individual");
                 }
-                TempData["Message"] = "Login error.:";
-                ModelState.AddModelError(string.Empty, "Invalid username or password.");
+                else
+                {
+                    // Kurumsal kullanıcı olarak işaretle
+                    HttpContext.Session.SetString("UserType", "Corporate");
+                }
+                
+                // Session'a kullanıcı ID'sini kaydet
+                HttpContext.Session.SetInt32("UserID", user.UserId);
+                
+                TempData["Message"] = "Login successful.";
+                return RedirectToAction(nameof(LoginConfirmation));
             }
-
-            return View(model);
+            else
+            {
+                TempData["Message"] = "Login error: Invalid username or password.";
+            }
         }
-
+        else
+        {
+            TempData["Message"] = "Login error: Account not found.";
+        }
+    }
+    // ModelState.IsValid false ise, buraya ulaşılması, formun doğrulanamaması anlamına gelir.
+    // Bu durumda ModelState zaten "Invalid username or password." hatası verecek.
+    return View(model);
+}
         // GET: /login/confirmation
         public IActionResult LoginConfirmation()
         {
