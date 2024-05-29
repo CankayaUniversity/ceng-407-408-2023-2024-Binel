@@ -5,10 +5,10 @@
     Layout = "_Layout1";
 }
 <link rel="stylesheet" href="~/css/styles.css">
-<h1>Index</h1>
+<h1>Post Panel</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Yeni Post</a>
 </p>
 <table class="table">
     <thead>
@@ -56,9 +56,9 @@
                 @Html.DisplayFor(modelItem => item.ExternalPlatform)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+               @*  @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
+                    @Html.ActionLink("Sil", "Delete", new { id = item.PostId })
             </td>
         </tr>
 }

@@ -16,9 +16,19 @@ namespace Binel.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var posts = await _context.Posts.ToListAsync();
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdString != null && int.TryParse(userIdString, out int userId))
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+                if (user != null)
+                {
+                    var organizations = await _context.Posts.Where(o => o.OrganizationId == user.OrganizationId).ToListAsync();
+                    return View(organizations);
+                }
+            }
 
-            return View(posts);
+            return BadRequest();
+
         }
         [HttpGet]
 
@@ -42,7 +52,7 @@ namespace Binel.Controllers
                     }
 
                 }
-                
+
 
             }
             else
@@ -104,7 +114,19 @@ namespace Binel.Controllers
 
             return RedirectToAction("Index");
         }
-
+       
+        public async Task<IActionResult> Delete(int id)
+        {
+            var post = await _context.Posts.FindAsync(id);
+            return View(post);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(Post post)
+        {
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
     }
 }

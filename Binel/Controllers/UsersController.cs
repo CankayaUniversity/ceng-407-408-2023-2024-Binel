@@ -102,7 +102,7 @@ namespace Binel.Controllers
                     ModelState.AddModelError(string.Empty, "Bir hata oluştu, lütfen daha sonra tekrar deneyin.");
                 }
             }
-            return View(user);
+            return RedirectToAction("Logout", "Users");
         }
         #endregion
 
