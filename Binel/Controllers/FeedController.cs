@@ -53,5 +53,24 @@ namespace Binel.Controllers
 
             return View("Feed", donatePosts);
         }
+        // GET: /feed/filter?filterId=[Filtre ID]
+        public IActionResult Filter(int filterId)
+        {
+            IQueryable<DonatePost> query = _context.DonatePosts
+                .Include(p => p.Organization)
+                .Include(p => p.Categories);
+
+            if (filterId >= 0 && filterId <= 4)
+            {
+                query = query.Where(p => p.Categories.Any(c => c.CategoryId == filterId));
+            }
+
+            var donatePosts = query.OrderByDescending(p => p.PublishDate).ToList();
+
+            return PartialView("_FilteredPosts", donatePosts);
+        }
+
+
+
     }
 }

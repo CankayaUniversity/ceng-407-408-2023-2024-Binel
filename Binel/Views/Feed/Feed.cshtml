@@ -42,7 +42,7 @@
     </div>
 
     <!-- Feed İçeriği -->
-    <div class="container mt-4">
+    <div class="container mt-4" id="content-container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <!-- Feed Gönderileri -->
@@ -57,7 +57,6 @@
                                 </h5>
                                 <a href="/@post.Organization.OrganizationTitle.ToLower()/donatepost?id=@post.DonateId" class="btn btn-primary">Donate</a>
                                 <p class="card-text">@post.DonateText</p>
-                                <!-- Tarih bilgisini sağ alt köşede göster -->
                                 <div class="publish-date text-right">
                                     <p class="card-text">
                                         Tarih: @(post.PublishDate.HasValue ? post.PublishDate.Value.ToString("dd/MM/yyyy") : "Tarih bilinmiyor")
@@ -82,7 +81,6 @@
                 {
                     <p>Sonuç bulunamadı.</p>
                 }
-
             </div>
         </div>
     </div>
@@ -91,6 +89,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="site.js"></script>
+    <script src="~/js/site.js"></script>
 </body>
 </html>

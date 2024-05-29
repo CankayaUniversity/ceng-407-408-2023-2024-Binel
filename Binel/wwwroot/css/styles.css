@@ -141,24 +141,25 @@ body {
     font-family: 'Montserrat', sans-serif; /* Navbar linklerinin yazı tipi */
 }
 
-.nav-link:hover {
-    color: #1e90ff;
-}
+    .nav-link:hover {
+        color: #1e90ff;
+    }
 
 /* Footer Stilleri */
 .footer {
-    padding: 20px 0;
+    padding: 10px 0; /* Footer yüksekliğini azaltmak için padding küçültüldü */
     background-color: #f8f9fa;
     border-top: 1px solid #dee2e6;
     font-family: 'Montserrat', sans-serif; /* Footer yazı tipi */
+    font-size: 0.875rem; /* Yazı boyutunu küçültme */
+    text-align: center; /* Metin ortalama */
 }
 
-.footer a {
-    color: #6c757d;
-    font-family: 'Montserrat', sans-serif; /* Footer linklerinin yazı tipi */
-}
+    .footer a {
+        color: #6c757d;
+        font-family: 'Montserrat', sans-serif; /* Footer linklerinin yazı tipi */
+    }
 
-.footer a:hover {
-    color: #007bff;
-}
-
+        .footer a:hover {
+            color: #007bff;
+        }

@@ -1,0 +1,34 @@
+﻿@model List<Binel.Models.DonatePost>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var post in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="/@post.Organization.OrganizationTitle.ToLower()/donatepost?id=@post.DonateId">@post.Title</a>
+                </h5>
+                <a href="/@post.Organization.OrganizationTitle.ToLower()/donatepost?id=@post.DonateId" class="btn btn-primary">Donate</a>
+                <p class="card-text">@post.DonateText</p>
+                <div class="publish-date text-right">
+                    <p class="card-text">
+                        Tarih: @(post.PublishDate.HasValue ? post.PublishDate.Value.ToString("dd/MM/yyyy") : "Tarih bilinmiyor")
+                    </p>
+                </div>
+                <p class="card-text">Organizasyon: <a href="/@post.Organization.OrganizationTitle.ToLower()">@post.Organization.OrganizationName</a></p>
+                <p class="card-text">
+                    Kategoriler:
+                    @foreach (var category in post.Categories)
+                    {
+                        <span>@category.CategoryName</span>
+                    }
+                </p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Sonuç bulunamadı.</p>
+}

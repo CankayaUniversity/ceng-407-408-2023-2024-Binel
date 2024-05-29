@@ -38,26 +38,29 @@ main {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Footer stili */
-footer {
-    background-color: #343a40;
-    color: #ffffff;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
+/* Footer Stilleri */
+.footer {
+    padding: 10px 0; /* Footer yüksekliğini azaltmak için padding küçültüldü */
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    font-family: 'Montserrat', sans-serif; /* Footer yazı tipi */
+    font-size: 0.875rem; /* Yazı boyutunu küçültme */
+    text-align: center; /* Metin ortalama */
 }
 
-    footer a {
-        color: #ffffff;
-        text-decoration: none;
+    .footer a {
+        color: #6c757d;
+        font-family: 'Montserrat', sans-serif; /* Footer linklerinin yazı tipi */
     }
 
-        footer a:hover {
-            text-decoration: underline;
+        .footer a:hover {
+            color: #007bff;
         }
+
+    .footer .container {
+        padding: 0; /* Container içindeki padding'i kaldır */
+        margin: 0; /* Container içindeki margin'i kaldır */
+    }
 
 /* Mobil uyumlu stil */
 @media (max-width: 576px) {

@@ -1,24 +1,43 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener('DOMContentLoaded', function () {
+    $('.filter-button_0').click(function () {
+        filterPosts(0);
+    });
+    $('.filter-button_1').click(function () {
+        filterPosts(1);
+    });
+    $('.filter-button_2').click(function () {
+        filterPosts(2);
+    });
+    $('.filter-button_3').click(function () {
+        filterPosts(3);
+    });
+    $('.filter-button_4').click(function () {
+        filterPosts(4);
+    });
 
-// Write your JavaScript code.
+    function filterPosts(filterId) {
+        $.ajax({
+            url: '/feed/filter',
+            type: 'GET',
+            data: { filterId: filterId },
+            success: function (data) {
+                // Gelen veriyi konsola yazdır
+                console.log("Gelen Veri:", data);
 
-function isValidEmail(email) {
-    // Email için geçerli bir düzenli ifade
-    var emailRegex = /^[^\s@]+@@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-
-
-
-
-
+                // Sayfanın içeriğini güncelle
+                $('#content-container').html(data);
+            },
+            error: function (error) {
+                console.error('Filtreleme işlemi sırasında hata oluştu:', error);
+            }
+        });
+    }
 });
 
 
-//Bu kodlar, fare arama butonunun üzerine geldiğinde ve üzerinden çekildiğinde resminin değişmesini sağlar. search-bar-01.png ve search-bar-02.png dosyalarının gerçek yolunu belirterek bu kısmı güncelleyebilirsiniz.
+
+
+// Bu kodlar, fare arama butonunun üzerine geldiğinde ve üzerinden çekildiğinde resminin değişmesini sağlar.
 function changeImage() {
     document.getElementById("search-img").src = "search-bar-02.png";
 }

@@ -1,8 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using System.Security.Claims
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Binel</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/layout.css asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -32,14 +30,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Edit">Profil Ayarları</a>
                                 </li>
-                                
+
                                 // HttpContext örneğini al
                                 var httpContext = ViewContext.HttpContext;
 
                                 // Kullanıcı türünü al
                                 string userType = httpContext.Session.GetString("UserType");
-                                        
-                                if(userType == "Corporate")
+
+                                if (userType == "Corporate")
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" href="/Post">Paylaşılan Postlar</a>
@@ -47,8 +45,8 @@
                                 }
                             }
                         }
-                        
-                        
+
+
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -91,6 +89,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
