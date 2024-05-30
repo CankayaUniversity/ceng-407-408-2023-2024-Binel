@@ -1,0 +1,79 @@
+@model IEnumerable<Binel.Models.DonatePost>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout1";
+}
+<link rel="stylesheet" href="~/css/styles.css">
+<h1>Post Panel</h1>
+
+<p>
+    <a asp-action="Create">Yeni Post</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DonateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonateText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalDonate)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonateText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxLimit)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.MinLimit)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.TotalDonate)
+            </td>
+            <td>
+               @*  @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
+                    @Html.ActionLink("Sil", "Delete", new { id = item.DonateId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
