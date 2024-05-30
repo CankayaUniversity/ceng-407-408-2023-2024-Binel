@@ -17,6 +17,22 @@ namespace Binel.Controllers
         {
             _context = context;
         }
+    public async Task<IActionResult> Index()
+        {
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdString != null && int.TryParse(userIdString, out int userId))
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+                if (user != null)
+                {
+                    var organizations = await _context.DonatePosts.Where(o => o.OrganizationId == user.OrganizationId).ToListAsync();
+                    return View(organizations);
+                }
+            }
+
+            return BadRequest();
+
+        }
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -67,7 +83,30 @@ namespace Binel.Controllers
                 TotalDonate = model.TotalDonate,
                 MaxLimit = model.MaxLimit,
                 MinLimit = model.MinLimit,
+                Files = new List<FileUrl>()
+
             };
+                if (model.UploadedFilesDonate != null)
+                    {
+                foreach (var file in model.UploadedFilesDonate)
+                {
+                    if (file.Length > 0)
+                    {
+
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+
+
+                        var fileUrl = new FileUrl
+                        {
+                            FileUrl1 = uniqueFileName
+                        };
+                        donatePost.Files.Add(fileUrl);
+
+                    }
+                }
+            }
+
+
             if (!string.IsNullOrEmpty(newcategories))
             {
                 Category ket=new Category();
@@ -91,6 +130,7 @@ namespace Binel.Controllers
                     }
                 }
             }
+          
 
             if (_context != null)
             {
@@ -103,6 +143,24 @@ namespace Binel.Controllers
             }
 
             return RedirectToAction("Index", "Feed");
+
+
         }
+         public async Task<IActionResult> Delete(int id)
+        {
+            var donatePost = await _context.DonatePosts.FindAsync(id);
+            return View(donatePost);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(DonatePost donateposts)
+        {
+             _context.Database.ExecuteSqlRaw("Delete from Donate_Categories where donate_ID = "+donateposts.DonateId);
+            _context.Database.ExecuteSqlRaw("Delete from Media_Donate_Files where donate_ID = "+donateposts.DonateId);
+
+            _context.DonatePosts.Remove(donateposts);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+       
     }
 }
