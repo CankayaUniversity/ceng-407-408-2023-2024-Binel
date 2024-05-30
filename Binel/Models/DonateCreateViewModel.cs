@@ -1,6 +1,4 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System;
-using System.Collections.Generic;
+
 
 namespace Binel.Models;
 public class DonateCreateViewModel
@@ -12,5 +10,7 @@ public class DonateCreateViewModel
     public int? TotalDonate { get; set; }
     public int? MaxLimit { get; set; }
     public int? MinLimit { get; set; }
-    public string[] Categories { get; set; } // Kategorileri içeren bir dizi
+    public string[] Categories { get; set; } 
+    public List<IFormFile> UploadedFilesDonate { get; set; }
+
 }
