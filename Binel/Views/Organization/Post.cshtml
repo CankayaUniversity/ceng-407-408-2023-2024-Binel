@@ -11,19 +11,23 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/post_styles.css">
     <link rel="stylesheet" href="~/css/styles.css">
 </head>
 <body>
     <div class="container mt-4">
-        <h1>@Model.Title</h1>
-        <p>@Model.PostText</p>
+        <h1 class="display-4">@Model.Title</h1>
+        <p class="lead">@Model.PostText</p>
 
-        @foreach (var file in Model.Files)
-        {
-            <img src="@file.FileUrl1" alt="Media" class="img-fluid" />
-        }
+        <div class="row">
+            @foreach (var file in Model.Files)
+            {
+                <div class="col-md-4">
+                    <img src="@file.FileUrl1" alt="Media" class="img-fluid rounded mb-3" />
+                </div>
+            }
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -2,24 +2,24 @@
     Layout = "_Layout1";
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donation Successful</title>
+    <title>Bağış Başarılı</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/donate_success_styles.css">
     <link rel="stylesheet" href="~/css/styles.css">
 </head>
 <body>
     <div class="container mt-4 text-center">
-        <h1>Donation Successful!</h1>
-        <p>Your donation for "<strong>@ViewBag.DonateTitle</strong>" has been successfully completed.</p>
-        <p>Thank you for your contribution.</p>
-        <p><a href="/" class="btn btn-primary">Return to Home Page</a></p>
+        <h1 class="display-4">Bağış Başarılı!</h1>
+        <p class="lead">"<strong>@ViewBag.DonateTitle</strong>" için yaptığınız bağış başarıyla tamamlandı.</p>
+        <p>Katkınız için teşekkür ederiz.</p>
+        <p><a href="/Feed/Search" class="btn btn-primary btn-lg">Akışa Dön</a></p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

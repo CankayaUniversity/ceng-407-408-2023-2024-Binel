@@ -2,10 +2,11 @@
     ViewData["Title"] = "Home Page";
     Layout = "_Layout1";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Sayfası</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -14,7 +15,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/styles.css">
 </head>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<body>
+    <div class="container d-flex justify-content-between align-items-center min-vh-100">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="~/images/Union.png" alt="Your Logo">
+        </div>
+        <div>
+            <!-- Hoş Geldiniz Başlığı -->
+            <div class="welcome-text mb-4">
+                <h1>Şu an neler dönüyor?<br></h1>
+                <h2>Yardımlaşmanın yeri</h2>
+                <h3>Binel'a Hoş Geldiniz</h3>
+                <h4>Lütfen giriş yapınız</h4>
+            </div>
+            <div "mb-3">
+                <p>Hemen giriş yapın</p>
+                <p><a href="/Users/Login" class="btn btn-primary btn-block">Giriş Yap</a></p>
+            </div>
+            <div "mb-3">
+                <p>Kaydınız yok mu? Hemen kayıt olun</p>
+                <p><a href="/Users/Register" class="btn btn-success btn-block">Kayıt Ol</a></p>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+            <script src="~/js/site.js"></script>
+        </div>
+    </div>
+</body>
+</html>

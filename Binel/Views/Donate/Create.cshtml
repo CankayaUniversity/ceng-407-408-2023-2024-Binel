@@ -6,17 +6,17 @@
 
 <link rel="stylesheet" href="~/css/styles.css">
 
-<h1>Yeni Bağış Postu Ekle</h1>
+<div class="container mt-4">
+    <h1>Yeni Bağış Postu Ekle</h1>
+    <h4>Bağış Bilgileri</h4>
+    <hr />
 
-<h4>Bağış Bilgileri</h4>
-<hr />
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @{
-                if (ViewBag.OrganizationName != null)
+                @if (ViewBag.OrganizationName != null)
                 {
                     <div class="form-group">
                         <label asp-for="OrganizationId" class="control-label"></label>
@@ -24,78 +24,73 @@
                         <input type="hidden" asp-for="OrganizationId" value="@ViewBag.OrganizationId" />
                     </div>
                 }
-            }
-
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DonateText" class="control-label"></label>
-                <input asp-for="DonateText" class="form-control" />
-                <span asp-validation-for="DonateText" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalDonate" class="control-label"></label>
-                <input asp-for="TotalDonate" class="form-control" />
-                <span asp-validation-for="TotalDonate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxLimit" class="control-label"></label>
-                <input asp-for="MaxLimit" class="form-control" />
-                <span asp-validation-for="MaxLimit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MinLimit" class="control-label"></label>
-                <input asp-for="MinLimit" class="form-control" />
-                <span asp-validation-for="MinLimit" class="text-danger"></span>
-            </div>
-
-            <!-- Kategori seçme alanı -->
-        <div class="form-group">
-    <label class="control-label">Kategori</label>
-    <div id="categoryCheckboxes">
-        @foreach (var category in ViewBag.Categories)
-        {
-            <div class="form-check">
-                <input type="checkbox" id="@("category_" + category.Value)" name="categories" value="@category.Value" class="form-check-input" />
-                <label class="form-check-label" for="@("category_" + category.Value)">@category.Text</label>
-            </div>
-        }
-    </div>
-    <span asp-validation-for="Categories" class="text-danger"></span>
-</div>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            // Kategori seçim işlevselliği ekle
-            $("#categoryCheckboxes input[type='checkbox']").change(function () {
-                var selectedCategories = [];
-
-                // Seçilen kategorileri al
-                $("#categoryCheckboxes input[type='checkbox']:checked").each(function () {
-                    selectedCategories.push($(this).val());
-                });
-
-                // Seçilen kategorileri yazdır (isteğe bağlı)
-                console.log("Seçilen kategoriler: " + selectedCategories.join(", "));
-            });
-        });
-    </script>
-}
 
                 <div class="form-group">
-                <label asp-for="Categories" class="control-label">Kategori</label>
-                <input name="newcategories" class="form-control" />
-                <span asp-validation-for="Categories" class="text-danger"></span>
-            
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DonateText" class="control-label"></label>
+                    <input asp-for="DonateText" class="form-control" />
+                    <span asp-validation-for="DonateText" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalDonate" class="control-label"></label>
+                    <input asp-for="TotalDonate" class="form-control" />
+                    <span asp-validation-for="TotalDonate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxLimit" class="control-label"></label>
+                    <input asp-for="MaxLimit" class="form-control" />
+                    <span asp-validation-for="MaxLimit" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MinLimit" class="control-label"></label>
+                    <input asp-for="MinLimit" class="form-control" />
+                    <span asp-validation-for="MinLimit" class="text-danger"></span>
+                </div>
 
+                <div class="form-group">
+                    <label class="control-label">Kategori</label>
+                    <div id="categoryCheckboxes">
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <div class="form-check">
+                                <input type="checkbox" id="@("category_" + category.Value)" name="categories" value="@category.Value" class="form-check-input" />
+                                <label class="form-check-label" for="@("category_" + category.Value)">@category.Text</label>
+                            </div>
+                        }
+                    </div>
+                    <span asp-validation-for="Categories" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                @section Scripts {
+                    <script>
+                        $(document).ready(function () {
+                            $("#categoryCheckboxes input[type='checkbox']").change(function () {
+                                var selectedCategories = [];
+
+                                $("#categoryCheckboxes input[type='checkbox']:checked").each(function () {
+                                    selectedCategories.push($(this).val());
+                                });
+
+                                console.log("Seçilen kategoriler: " + selectedCategories.join(", "));
+                            });
+                        });
+                    </script>
+                }
+
+                <div class="form-group">
+                    <label asp-for="Categories" class="control-label">Yeni Kategori Ekle</label>
+                    <input name="newcategories" class="form-control" />
+                    <span asp-validation-for="Categories" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block" />
+                </div>
+            </form>
+        </div>
     </div>
-</div> 
+</div>
