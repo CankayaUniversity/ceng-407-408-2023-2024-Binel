@@ -1,13 +1,16 @@
 ﻿@model List<Binel.Models.DonatePost>
 @{
     Layout = "_Layout1";
+    var keyword = ViewBag.keyword as string;
+    var totalPages = ViewBag.TotalPages as int? ?? 1;
+    int currentPage = ViewBag.CurrentPage != null ? Convert.ToInt32(ViewBag.CurrentPage) : 1;
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Sayfası</title>
+    <title>Feed</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +25,7 @@
             <div class="col-md-8 text-center">
                 <div class="search-container">
                     <form method="get" action="/feed/search">
-                        <input type="text" name="keyword" placeholder="Ara..." class="form-control d-inline-block" style="width: auto;">
+                        <input type="text" name="keyword" placeholder="Ara..." class="form-control d-inline-block" style="width: auto;" value="@keyword">
                         <button type="submit" class="search-button btn btn-primary">
                             <img src="~/images/search-bar-01.png" alt="Search">
                         </button>
@@ -81,6 +84,24 @@
                 {
                     <p>Sonuç bulunamadı.</p>
                 }
+            </div>
+        </div>
+    </div>
+
+    <!-- Sayfa Numaralandırma -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        @for (int i = 1; i <= totalPages; i++)
+                        {
+                            <li class="page-item @(i == currentPage ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Search", new { keyword = keyword, pageNum = i })">@i</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
